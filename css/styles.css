@@ -411,6 +411,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .scat:hover h3{color:var(--orange)}
 
 
+/* ---------- Menú en barra (celular) ---------- */
+@media(max-width:859px){
+  nav{padding:10px 10px 0;background:transparent !important;backdrop-filter:none !important}
+  nav .wrap{height:56px;background:#141416;border-radius:14px;justify-content:center;padding:0 18px}
+  nav .brand span{font-size:22px}
+}
+
 /* ---------- Titular con efecto de escritura ---------- */
 #hero h1 .type{white-space:pre-wrap}
 #hero h1 .cursor{display:inline-block;width:.42em;height:.075em;margin-left:.06em;background:var(--orange);vertical-align:baseline;animation:blink 1s steps(1) infinite}
@@ -421,17 +428,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .hero-photo{display:none}
 .nav-logo{display:none}
 @media(min-width:860px){
-  /* menú tipo cápsula centrada */
-  nav{border-bottom:0;background:transparent !important;backdrop-filter:none !important}
-  nav .wrap{max-width:none;padding:0 28px;height:78px;justify-content:center;position:relative}
+  /* menú en barra sólida con logo al centro */
+  nav .wrap{max-width:none;height:auto;padding:0;justify-content:center}
   nav .brand{display:none}
-  nav .links{display:flex;align-items:center;gap:30px;padding:8px 28px;background:rgba(40,40,44,.55);border:1px solid rgba(255,255,255,.1);border-radius:6px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
-  nav .links a{color:#e9e9ea}
-  nav .nav-logo{display:flex;align-items:center;margin:0 6px}
-  nav .nav-logo img{height:30px;width:auto}
-
+  nav .links{display:flex;align-items:center;width:100%;gap:28px;padding:0 34px;height:64px;background:#141416;border-radius:16px;font-size:14px;font-weight:600;text-transform:none;letter-spacing:0}
+  nav .links a{color:#fff;text-decoration:none}
+  nav .links a:hover{color:var(--orange)}
+  nav .nav-logo{display:flex;align-items:center;gap:10px;margin:0 auto}
+  nav .nav-logo img{height:28px;width:auto}
+  nav .nav-logo span{font-family:Archivo,sans-serif;font-stretch:62%;font-weight:900;font-size:28px;letter-spacing:.5px;color:#fff}
+  nav .nav-logo span b{color:var(--orange);font-weight:900}
+  nav{padding:12px 12px 0}
   /* portada a todo lo ancho */
-  #hero{min-height:100svh;padding:150px 0 70px;background:#0b0705}
+  #hero{min-height:100svh;padding:160px 0 70px;background:#0b0705}
   #hero #hex,#hero .hero-visual,#hero .scroll-hint{display:none}
   #hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;z-index:-1;background:linear-gradient(180deg,transparent,rgba(11,11,12,.9));pointer-events:none}
   #hero .hero-glow{background:
