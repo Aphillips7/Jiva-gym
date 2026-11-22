@@ -515,6 +515,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .cur-center::before{top:22%}.cur-center::after{bottom:22%}
 .curtain{margin-bottom:-16vh}
 .cur-center::after{display:none}
+/* ---------- Beneficios: lista editorial ---------- */
+.blist{margin-top:36px;border-top:1px solid #2a2c30}
+.brow{position:relative;display:grid;grid-template-columns:38px 1fr;gap:6px 18px;align-items:baseline;padding:24px 4px;border-bottom:1px solid #2a2c30;transition:background .35s, padding .35s;overflow:hidden}
+.brow::before{content:"";position:absolute;inset:0;background:var(--orange);transform:scaleY(0);transform-origin:bottom;transition:transform .45s cubic-bezier(.2,.8,.2,1);z-index:0}
+.brow>*{position:relative;z-index:1}
+.bnum{font-family:Archivo,sans-serif;font-stretch:62%;font-weight:900;font-size:22px;color:var(--orange);transition:color .3s}
+.brow h3{font-size:clamp(30px,3.8vw,54px);line-height:.9;color:#fff;transition:color .3s}
+.brow p{grid-column:2;color:var(--silver);font-size:15px;max-width:440px;transition:color .3s}
+.barrow{display:none}
+@media(min-width:900px){
+  .brow{grid-template-columns:70px 1.3fr 1fr 40px;align-items:center;padding:30px 12px}
+  .brow p{grid-column:auto}
+  .barrow{display:block;font-size:30px;color:#fff;opacity:0;transform:translate(-10px,10px);transition:opacity .3s, transform .35s}
+  .brow:hover::before{transform:scaleY(1)}
+  .brow:hover .bnum,.brow:hover h3,.brow:hover p,.brow:hover .barrow{color:#140800}
+  .brow:hover .barrow{opacity:1;transform:none}
+}
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s, transform .7s}
 .rv.in{opacity:1;transform:none}
