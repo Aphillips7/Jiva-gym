@@ -62,6 +62,20 @@
     setTimeout(function(){deleting=true;tick();}, 5200);
   })();
 
+  // ---------- Pase de prueba: se abre al pedirlo ----------
+  (function(){
+    var sec=document.getElementById('pase'); if(!sec) return;
+    function openPase(scroll){
+      sec.classList.add('open');
+      sec.querySelectorAll('.rv').forEach(function(e){e.classList.add('in')});
+      if(scroll) requestAnimationFrame(function(){ sec.scrollIntoView({behavior:'smooth',block:'start'}); setTimeout(function(){ var f=document.getElementById('fName'); if(f) f.focus({preventScroll:true}); },700); });
+    }
+    document.querySelectorAll('a[href="#pase"]').forEach(function(a){
+      a.addEventListener('click',function(e){ e.preventDefault(); openPase(true); });
+    });
+    if(location.hash==='#pase') openPase(true);
+  })();
+
   // ---------- Nav + sticky ----------
   var nav=document.getElementById('nav'), sticky=document.getElementById('sticky'), pase=document.getElementById('pase');
   function onScroll(){
