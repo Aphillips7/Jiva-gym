@@ -117,7 +117,7 @@ nav .btn{padding:10px 18px;font-size:15px}
 .flip .t-o{background:var(--orange);border-color:var(--orange)}
 .flip .t-o q,.flip .t-o strong,.flip .t-o span,.flip .t-o p{color:#140800}
 .flip .t-s{background:#fff;border-color:#fff}
-.flip .t-s q,.flip .t-s strong{color:var(--orange)}
+.flip .t-s q,.flip .t-s strong{color:#0a0203}
 .flip .t-s span,.flip .t-s p{color:#3a3c41}
 .flip .t-s::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0 56 16.17V48.5L28 64.67 0 48.5V16.17zM28 64.67V97' fill='none' stroke='%23000000' stroke-opacity='.06' stroke-width='2'/%3E%3C/svg%3E")}
 .flip:hover .in{transform:translateY(-4px)}
