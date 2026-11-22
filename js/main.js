@@ -6,8 +6,10 @@
   if(seen || matchMedia('(prefers-reduced-motion: reduce)').matches){ intro.style.display='none'; setTimeout(startLeds,50); }
   else {
     setTimeout(function(){intro.classList.add('s1')},250);
-    setTimeout(function(){intro.classList.add('s2')},1000);
-    var t=setTimeout(endIntro,2300);
+    setTimeout(function(){intro.classList.add('s2')},850);
+    setTimeout(function(){intro.classList.add('s3')},1150);
+    setTimeout(function(){intro.classList.add('out')},2700);
+    var t=setTimeout(endIntro,3100);
     intro.addEventListener('click',function(){clearTimeout(t);endIntro()});
   }
 
