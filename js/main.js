@@ -65,7 +65,7 @@
   function onScroll(){
     var y=window.scrollY; nav.classList.toggle('solid',y>40);
     var pr=pase.getBoundingClientRect(), tr=document.getElementById('telon').getBoundingClientRect(); var inPase=(pr.top<innerHeight && pr.bottom>0)||(tr.top<innerHeight*0.5 && tr.bottom>innerHeight*0.5);
-    sticky.classList.toggle('show', y>innerHeight*0.8 && !inPase);
+    if(sticky) sticky.classList.toggle('show', y>innerHeight*0.8 && !inPase);
   }
   addEventListener('scroll',onScroll,{passive:true}); onScroll();
 
