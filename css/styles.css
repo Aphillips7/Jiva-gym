@@ -409,6 +409,28 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .scat h3{margin-top:22px;font-size:clamp(40px,4vw,62px);line-height:.9;color:#0a0203}
 .scat:hover h3{color:var(--orange)}
 
+
+/* ---------- Portada con foto (laptop/escritorio) ---------- */
+.hero-photo{display:none}
+@media(min-width:860px){
+  #hero{min-height:100svh;padding:84px 0 0;justify-content:center;align-items:center;text-align:center;background:var(--bg)}
+  #hero .hero-glow,#hero #hex,#hero .watermark,#hero .hero-visual,#hero .scroll-hint{display:none}
+  #hero::after{display:none}
+  .hero-photo{display:block;position:absolute;top:80px;left:20px;right:20px;bottom:20px;z-index:-1;border-radius:20px;overflow:hidden;
+    background:#050505 url(../assets/img/hero-laptop.jpg) center 28%/cover no-repeat}
+  .hero-photo::after{content:"";position:absolute;inset:0;background:
+    radial-gradient(ellipse 60% 45% at 50% 58%,rgba(0,0,0,.35),transparent 70%),
+    linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.05) 35%,rgba(0,0,0,.35) 70%,rgba(0,0,0,.85) 100%)}
+  #hero .wrap{position:relative;z-index:1}
+  #hero h1{font-size:clamp(88px,9vw,150px);line-height:.88;margin-top:12vh}
+  #hero h1 br{display:none}
+  #hero .hero-cta{justify-content:center;margin-top:30px}
+  #hero .hero-top{position:absolute;left:0;right:0;max-width:none;bottom:44px;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .hero-top .eyebrow{margin:0;justify-content:center}
+  .hero-top .eyebrow::before{display:none}
+  .hero-top .followers{justify-content:center;font-size:14px}
+}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s, transform .7s}
 .rv.in{opacity:1;transform:none}
