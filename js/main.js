@@ -63,7 +63,7 @@
   // ---------- Nav + sticky ----------
   var nav=document.getElementById('nav'), sticky=document.getElementById('sticky'), pase=document.getElementById('pase');
   function onScroll(){
-    var y=window.scrollY; nav.classList.toggle('solid',y>40);
+    var y=window.scrollY; nav.classList.toggle('solid',y>innerHeight*0.6);
     var pr=pase.getBoundingClientRect(), tr=document.getElementById('telon').getBoundingClientRect(); var inPase=(pr.top<innerHeight && pr.bottom>0)||(tr.top<innerHeight*0.5 && tr.bottom>innerHeight*0.5);
     if(sticky) sticky.classList.toggle('show', y>innerHeight*0.8 && !inPase);
   }
