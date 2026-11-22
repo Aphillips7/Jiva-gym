@@ -40,6 +40,26 @@
     },700);
   }
 
+
+  // ---------- Titular con efecto de escritura ----------
+  (function(){
+    var el=document.querySelector('#hero h1 .type'); if(!el) return;
+    var words=(el.dataset.words||el.textContent).split('|'); if(words.length<2) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var wi=0, txt=words[0], deleting=false;
+    function tick(){
+      var target=words[wi];
+      if(!deleting){
+        if(txt.length<target.length){ txt=target.slice(0,txt.length+1); el.textContent=txt; return setTimeout(tick,85); }
+        deleting=true; return setTimeout(tick,2400);
+      } else {
+        if(txt.length>0){ txt=txt.slice(0,-1); el.textContent=txt; return setTimeout(tick,40); }
+        deleting=false; wi=(wi+1)%words.length; return setTimeout(tick,250);
+      }
+    }
+    setTimeout(function(){deleting=true;tick();}, 5200);
+  })();
+
   // ---------- Nav + sticky ----------
   var nav=document.getElementById('nav'), sticky=document.getElementById('sticky'), pase=document.getElementById('pase');
   function onScroll(){
