@@ -532,6 +532,40 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .brow:hover .bnum,.brow:hover h3,.brow:hover p,.brow:hover .barrow{color:#140800}
   .brow:hover .barrow{opacity:1;transform:none}
 }
+/* ---------- Horario y ubicación: editorial ---------- */
+.hz{display:grid;gap:40px;align-items:stretch;max-width:1240px}
+@media(min-width:960px){.hz{grid-template-columns:1fr 1.05fr;gap:64px}}
+#horario .open-now{margin:22px 0 6px;font-size:14px;font-weight:600;color:#e9e9ea;display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:1px}
+#horario .sched{border-top:1px solid #2a2c30;margin-top:10px}
+#horario .sched div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 0;border-bottom:1px solid #2a2c30;color:#6d7076}
+#horario .sched span{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px}
+#horario .sched b{font-family:Archivo,sans-serif;font-stretch:62%;font-weight:900;font-size:clamp(34px,4.4vw,58px);line-height:.9;color:#4a4c52;white-space:nowrap}
+#horario .sched b i{font-style:normal;color:inherit;opacity:.6;margin:0 .1em}
+#horario .sched .today span{color:var(--orange)}
+#horario .sched .today b{color:#fff}
+#horario .sched .park b{font-size:clamp(24px,2.6vw,34px)}
+.hz-where{margin-top:34px}
+.hz-where span{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--orange)}
+.hz-where p{font-family:Archivo,sans-serif;font-stretch:62%;font-weight:900;font-size:clamp(28px,3vw,40px);line-height:1;text-transform:uppercase;margin-top:8px}
+.hz-where small{display:block;color:var(--muted);font-size:14px;margin-top:8px}
+.hz-go{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-family:Archivo,sans-serif;font-stretch:62%;font-weight:900;font-size:26px;text-transform:uppercase;color:#fff;text-decoration:none;border-bottom:3px solid var(--orange);padding-bottom:4px}
+.hz-go i{font-style:normal;color:var(--orange);transition:transform .3s}
+.hz-go:hover i{transform:translate(4px,-4px)}
+.hz-media{position:relative;min-height:420px}
+.hz-media .loc-map{position:absolute;inset:0;border-radius:18px;overflow:hidden;min-height:0}
+.hz-media .loc-photo{position:absolute;left:-28px;bottom:-28px;width:44%;aspect-ratio:4/3;min-height:0;border-radius:14px;overflow:hidden;background:#161719;border:6px solid var(--bg);z-index:2}
+.hz-media .ph-empty{inset:10px}
+@media(max-width:959px){.hz-media{min-height:340px;margin-bottom:40px}.hz-media .loc-photo{left:12px;bottom:-30px;width:52%}}
+/* ---------- Textos secundarios estilo Nike ---------- */
+body{font-family:"Inter Tight",Archivo,system-ui,sans-serif}
+.eyebrow,.hero-top .eyebrow{font-family:"Inter Tight",sans-serif !important;font-stretch:100%;font-weight:500 !important;text-transform:none !important;letter-spacing:-.005em !important;font-size:16px !important;color:#fff;gap:0;margin-bottom:10px}
+.eyebrow::before,.hero-top .eyebrow::before{display:none}
+.lead,.hero-lead,.pase-lead,.cur-center p,.scard .desc{font-family:"Inter Tight",sans-serif;font-weight:400;font-size:clamp(17px,1.5vw,20px) !important;line-height:1.4 !important;letter-spacing:-.01em;color:#d9dadc !important}
+.cur-center p{max-width:480px}
+#horario .open-now,#horario .sched span,.hz-where span,.proof small{font-family:"Inter Tight",sans-serif;text-transform:none !important;letter-spacing:-.005em !important;font-size:15px !important;font-weight:500}
+.hz-where span{color:#fff}
+.pill{font-family:"Inter Tight",sans-serif;font-weight:500}
+nav .links{font-family:"Inter Tight",sans-serif;font-weight:500 !important;font-size:15px !important}
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s, transform .7s}
 .rv.in{opacity:1;transform:none}

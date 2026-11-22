@@ -7,7 +7,7 @@
 <link rel="icon" href="assets/logo/jiva-gym-logo-mark.svg" type="image/svg+xml">
 <title>Jiva Gym — Sé más fuerte que tus excusas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -271,29 +271,24 @@
 
 <!-- HORARIO -->
 <section id="horario">
-  <div class="wrap">
-    <div class="eyebrow">Horario y ubicación</div>
-    <h2 class="rv">Entrena a tu <span class="o">hora</span></h2>
-    <div class="info">
-      <div class="box rv">
-        <div class="open-now" id="openNow"></div>
-        <div class="sched" id="sched">
-          <div data-d="1,2,3,4,5,6"><span>Lunes a sábado</span><b>5:00 a. m. – 11:00 p. m.</b></div>
-          <div data-d="0"><span>Domingo</span><b>10:00 a. m. – 6:00 p. m.</b></div>
-        </div>
-        <p class="note">Estacionamiento vigilado de 8:00 a. m. a 5:00 p. m.</p>
+  <div class="wrap hz">
+    <div class="hz-info">
+      <div class="eyebrow">Horario y ubicación</div>
+      <h2 class="rv">Entrena a tu <span class="o">hora</span></h2>
+      <div class="open-now" id="openNow"></div>
+      <div class="sched" id="sched">
+        <div data-d="1,2,3,4,5,6"><span>Lunes a sábado</span><b>5 AM <i>—</i> 11 PM</b></div>
+        <div data-d="0"><span>Domingo</span><b>10 AM <i>—</i> 6 PM</b></div>
+        <div class="park" data-d=""><span>Parking vigilado</span><b>8 AM <i>—</i> 5 PM</b></div>
+      </div>
+      <div class="hz-where">
+        <span>Dónde estamos</span>
+        <p>Las Américas 280-3, La Chorrera</p>
+        <small>Frente a la clínica Saturno · Edificio El Carmen, 2.º piso</small>
+        <a class="hz-go" href="https://www.google.com/maps/search/?api=1&amp;query=Jiva+Gym+La+Chorrera&amp;query_place_id=ChIJBROkVwCZrI8R_ry8TPDQNjw" target="_blank" rel="noopener">Cómo llegar <i>↗</i></a>
       </div>
     </div>
-    <div class="loc rv">
-      <div class="loc-info">
-        <h3><span class="jv">Jiva</span> <span class="o">Gym</span></h3>
-        <p class="loc-addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Vía principal, frente a la clínica Saturno.<br>Edificio El Carmen, 2.º piso.<br>La Chorrera, Panamá Oeste.</span></p>
-        <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=Jiva+Gym+La+Chorrera&amp;query_place_id=ChIJBROkVwCZrI8R_ry8TPDQNjw" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M3 11l18-8-8 18-2-8z"/></svg>Cómo llegar</a>
-      </div>
-      <div class="loc-photo">
-        <!-- Foto del local: reemplazar por <img src="fachada.jpg" alt="Fachada de Jiva Gym"> -->
-        <div class="ph-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 7h3l2-3h6l2 3h3v13H4z"/><circle cx="12" cy="13" r="4"/></svg><span>Foto del local</span></div>
-      </div>
+    <div class="hz-media rv">
       <div class="loc-map">
         <iframe class="gmap" title="Ubicación de Jiva Gym en Google Maps" src="https://maps.google.com/maps?q=Jiva%20Gym%2C%20La%20Chorrera%2C%20Panam%C3%A1&amp;ll=8.8849043,-79.775976&amp;z=17&amp;hl=es&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
         <a class="map-fallback" href="https://www.google.com/maps/search/?api=1&amp;query=Jiva+Gym+La+Chorrera&amp;query_place_id=ChIJBROkVwCZrI8R_ry8TPDQNjw" target="_blank" rel="noopener" aria-label="Abrir ubicación en Google Maps">
@@ -319,6 +314,10 @@
           <text x="300" y="186" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="700" font-size="14" fill="#F26A1B">JIVA GYM</text>
         </svg>
         </a>
+      </div>
+      <div class="loc-photo">
+        <!-- Foto del local: poner aquí la imagen de la fachada -->
+        <div class="ph-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 7h3l2-3h6l2 3h3v13H4z"/><circle cx="12" cy="13" r="4"/></svg><span>Foto del local</span></div>
       </div>
     </div>
   </div>
