@@ -566,6 +566,9 @@ body{font-family:"Inter Tight",Archivo,system-ui,sans-serif}
 .hz-where span{color:#fff}
 .pill{font-family:"Inter Tight",sans-serif;font-weight:500}
 nav .links{font-family:"Inter Tight",sans-serif;font-weight:500 !important;font-size:15px !important}
+.brand img.lockup,nav .nav-logo img.lockup{height:30px !important;width:auto}
+@media(max-width:859px){.brand img.lockup{height:26px !important}}
+.i-left img.lockup{height:clamp(34px,4.4vw,60px) !important;width:auto}
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s, transform .7s}
 .rv.in{opacity:1;transform:none}
