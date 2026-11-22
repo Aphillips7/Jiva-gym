@@ -109,7 +109,7 @@
     }
     var cr=cur.getBoundingClientRect(), span=cr.height-innerHeight;
     var raw=Math.min(Math.max(-cr.top/span,0),1);
-    var p2=Math.min(Math.max((raw-0.12)/0.6,0),1); p2=p2<.5?2*p2*p2:1-Math.pow(-2*p2+2,2)/2;
+    var p2=Math.min(Math.max((raw-0.05)/0.75,0),1); p2=p2<.5?2*p2*p2:1-Math.pow(-2*p2+2,2)/2;
     curS.style.setProperty('--p',p2.toFixed(4));
     ticking=false;
   }
@@ -200,11 +200,11 @@
     else { qr.innerHTML='<div style="width:120px;height:120px;display:flex;align-items:center;justify-content:center;color:#000;font:800 16px Archivo">'+code+'</div>'; }
     var msg='Hola Jiva Gym, soy '+name+'. Tengo mi pase de prueba '+code+' para '+dayTxt.toLowerCase()+' ('+time.toLowerCase()+').';
     document.getElementById('tWa').href='https://wa.me/?text='+encodeURIComponent(msg);
-    document.getElementById('passEmpty').style.display='none';
+    form.classList.add('sent');
     var t=document.getElementById('ticket'); t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
     leads.unshift({name:name,phone:phoneFmt,when:dayTxt+' · '+time,goal:document.getElementById('fGoal').value,code:code,at:new Date().toISOString(),st:0});
     save(); render(0);
     setTimeout(function(){ notify('¡Listo, '+name.split(' ')[0]+'!', 'Tu pase '+code+' está listo · '+dayTxt); },600);
-    if(innerWidth<860) t.scrollIntoView({behavior:'smooth',block:'center'});
+    t.scrollIntoView({behavior:'smooth',block:'center'});
   });
 })();

@@ -340,21 +340,36 @@
 
 <!-- PASE -->
 <section id="pase">
-  <div class="wrap">
-    <div class="eyebrow">Tu primera vez en&nbsp;<span class="jv">Jiva</span></div>
-    <h2 class="rv">Pide tu <span class="o">pase de prueba</span></h2>
-    <p class="lead rv">Deja tus datos y recibe un pase con código QR. Lo muestras en recepción y entrenas gratis tu primer día.</p>
-    <div class="pass-grid">
-      <form id="passForm" class="box rv" novalidate>
-        <div class="field"><label for="fName">Nombre</label><input id="fName" autocomplete="name" placeholder="Ej. Carlos Pérez"><div class="err" id="eName">Escribe tu nombre.</div></div>
-        <div class="field"><label for="fPhone">WhatsApp</label><input id="fPhone" inputmode="tel" autocomplete="tel" placeholder="6000-0000"><div class="err" id="ePhone">Escribe un número de 8 dígitos.</div></div>
-        <div class="field"><label for="fDay">¿Qué día vienes?</label><select id="fDay"></select></div>
-        <div class="field"><label for="fTime">¿A qué hora?</label><select id="fTime"><option>Madrugada (5–8 a. m.)</option><option>Mañana (8–12)</option><option>Tarde (12–6 p. m.)</option><option selected>Noche (6–11 p. m.)</option></select></div>
-        <div class="field"><label for="fGoal">Tu meta</label><select id="fGoal"><option>Bajar de peso</option><option>Ganar masa muscular</option><option>Salud y energía</option><option>Volver a entrenar</option></select></div>
-        <button class="btn btn-primary btn-block" type="submit">Generar mi pase</button>
+  <div class="wrap pase-wrap">
+    <div class="pase-info">
+      <span class="pill"><i></i>Pase de prueba</span>
+      <h2>Empieza tu<br>cambio en <span class="jv">Jiva</span></h2>
+      <p class="pase-lead">Cuéntanos tu meta y cuándo vienes. Te enviamos un pase con código QR para entrenar gratis tu primer día.</p>
+      <div class="proof">
+        <div class="avs"><span>MG</span><span>JR</span><span>AC</span></div>
+        <div><div class="stars">★★★★★</div><small>4.5 en Google · 30 reseñas</small></div>
+      </div>
+      <div class="pase-contact">
+        <div><b>Escríbenos</b><a href="https://wa.me/50769554652" target="_blank" rel="noopener">+507 6955-4652</a></div>
+        <div><b>Dirección</b><a href="https://www.google.com/maps/search/?api=1&amp;query=Jiva+Gym+La+Chorrera&amp;query_place_id=ChIJBROkVwCZrI8R_ry8TPDQNjw" target="_blank" rel="noopener">Las Américas 280-3<br>La Chorrera, Panamá Oeste</a></div>
+      </div>
+      <div class="socials">
+        <a href="https://www.instagram.com/jiva_gym.x/" target="_blank" rel="noopener" aria-label="Instagram de Jiva Gym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://wa.me/50769554652" target="_blank" rel="noopener" aria-label="WhatsApp de Jiva Gym"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2A9.7 9.7 0 0 0 3.7 16.9L2.3 21.8l5-1.3A9.7 9.7 0 1 0 12 2.2zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1l-.5-.3z"/></svg></a>
+      </div>
+    </div>
+    <div class="pase-side">
+      <form id="passForm" class="pase-card" novalidate>
+        <div class="field"><label for="fName">Nombre *</label><input id="fName" autocomplete="name" placeholder="Carlos Pérez"><div class="err" id="eName">Escribe tu nombre.</div></div>
+        <div class="field"><label for="fPhone">WhatsApp *</label><input id="fPhone" inputmode="tel" autocomplete="tel" placeholder="6000-0000"><div class="err" id="ePhone">Escribe un número de 8 dígitos.</div></div>
+        <div class="row2">
+          <div class="field"><label for="fDay">Día *</label><select id="fDay"></select></div>
+          <div class="field"><label for="fTime">Hora *</label><select id="fTime"><option>Madrugada (5–8 a. m.)</option><option>Mañana (8–12)</option><option>Tarde (12–6 p. m.)</option><option selected>Noche (6–11 p. m.)</option></select></div>
+        </div>
+        <div class="field"><label for="fGoal">Tu meta *</label><select id="fGoal"><option>Bajar de peso</option><option>Ganar masa muscular</option><option>Salud y energía</option><option>Volver a entrenar</option></select></div>
+        <button class="pase-submit" type="submit">Generar mi pase</button>
       </form>
-      <div>
-        <div class="pass-empty" id="passEmpty"><div class="display">Tu pase aparece aquí</div><p>Llena el formulario y se genera al instante.</p></div>
+      <div class="pass-empty" id="passEmpty" hidden></div>
         <div class="ticket" id="ticket">
           <div class="top"><b>Pase de prueba</b><span style="font-weight:900"><span style="color:#fff">JIVA</span> GYM</span></div>
           <div class="body">
@@ -366,7 +381,6 @@
             <a class="btn btn-ghost" href="#horario">Cómo llegar</a>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </section>
