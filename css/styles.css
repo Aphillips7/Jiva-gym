@@ -638,6 +638,22 @@ footer{padding:24px 0 32px}
   .scard-r{text-align:right}
   .scard .per{font-size:14px}
 }
+@media(max-width:799px){
+  .entrena{padding:48px 0 44px}
+  .entrena-title{font-size:46px;margin-bottom:24px}
+  .fcard{flex:0 0 60%;aspect-ratio:3/4}
+  .fcard h3{font-size:30px;bottom:8%}
+  .fcard .fmedia svg{width:36%;height:36%;margin-bottom:30%}
+  .scat{flex:0 0 60%}
+  .scat h3{font-size:30px}
+}
+@media(max-width:799px){
+  .feat,.scats{scroll-padding-inline:20px}
+  .store-head{align-items:flex-end;flex-wrap:nowrap}
+  .store-title{font-size:46px !important}
+  .store-btn{font-size:17px;padding:11px 14px;gap:6px}
+  .store-btn svg{width:16px;height:16px}
+}
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s, transform .7s}
 .rv.in{opacity:1;transform:none}
