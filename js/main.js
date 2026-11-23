@@ -109,7 +109,7 @@
     }
     var cr=cur.getBoundingClientRect(), span=cr.height-innerHeight;
     var raw=Math.min(Math.max(-cr.top/span,0),1);
-    var p2=Math.min(Math.max((raw-0.05)/0.75,0),1); p2=p2<.5?2*p2*p2:1-Math.pow(-2*p2+2,2)/2;
+    var p2=Math.min(Math.max((raw-0.02)/0.85,0),1); p2=p2<.5?2*p2*p2:1-Math.pow(-2*p2+2,2)/2;
     curS.style.setProperty('--p',p2.toFixed(4));
     ticking=false;
   }
