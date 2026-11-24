@@ -146,11 +146,16 @@
   var state=scards.map(function(){return {e:0,p:0,te:0,tp:0}}), curP={v:0,t:0}, running=false;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var touch=matchMedia('(hover: none), (pointer: coarse)').matches;
-  if(touch){
-    // En celular: entrada por tiempo (una vez) y sin efectos ligados al scroll, para que no vibre
-    document.documentElement.classList.add('stack-touch');
-    var io3=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('landed'); io3.unobserve(e.target);} })},{threshold:.12});
-    scards.forEach(function(c){io3.observe(c)});
+  // En celular: apilado ligado al scroll con animaciones nativas del navegador (van pegadas al dedo, sin vibrar)
+  var nativeSD=touch && !reduce && window.CSS && CSS.supports('animation-timeline','--a') && CSS.supports('animation-range','cover 0% cover 50%');
+  if(nativeSD){
+    document.documentElement.classList.add('stack-sd');
+    marks.forEach(function(m,i){ m.style.viewTimelineName='--m'+i; });
+    scards.forEach(function(c,i){
+      var tl='--m'+i+(i<scards.length-1?', --m'+(i+1):'');
+      c.style.animationTimeline=tl;
+      if(i<scards.length-1) c.style.setProperty('--next','--m'+(i+1));
+    });
   }
   var stTop=[]; function measure(){ stTop=scards.map(function(c){return parseFloat(getComputedStyle(c).top)||86}); } measure(); addEventListener('resize',measure);
   function targets(){
@@ -171,7 +176,7 @@
     curP.t=Math.min(Math.max((raw-0.02)/0.85,0),1);
   }
   function apply(){
-    if(!touch) scards.forEach(function(card,i){
+    if(!nativeSD) scards.forEach(function(card,i){
       var s=state[i], e=1-Math.pow(1-s.e,3);
       card.style.setProperty('--ty',((1-e)*80).toFixed(2)+'px');
       card.style.setProperty('--er',((1-e)*(i%2?4:-4)).toFixed(3)+'deg');
