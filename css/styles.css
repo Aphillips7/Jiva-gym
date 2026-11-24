@@ -303,7 +303,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .scard:last-child{margin-bottom:6vh}
 .scard.dark{background:#121214;border:1px solid #26272b}
 .scard.orange{background:var(--orange);color:#140800}
-.scard .ghost{position:absolute;top:10px;left:0;right:0;overflow:hidden;white-space:nowrap;pointer-events:none}
+.scard .ghost{position:absolute;top:0;padding-top:.08em;line-height:1.1;left:0;right:0;overflow:hidden;white-space:nowrap;pointer-events:none}
 .ghost-track{display:inline-flex;animation:marq 40s linear infinite}
 .ghost span{font-family:Archivo,sans-serif;font-stretch:62%;font-weight:900;font-size:clamp(110px,18vw,230px);line-height:.85;text-transform:uppercase;padding-right:.2em}
 .scard.dark .ghost span{color:rgba(255,255,255,.045)}
@@ -663,6 +663,10 @@ footer{padding:24px 0 32px}
   .store-btn{font-size:22px;padding:14px 22px}
   .scat{flex:0 0 66%}
 }
+.ghost span{line-height:1.1 !important}
+.cur-center::before,.cur-center::after{display:none !important}
+.brow::before{opacity:0;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .2s}
+@media(min-width:900px){.brow:hover::before{opacity:1}}
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s, transform .7s}
 .rv.in{opacity:1;transform:none}
