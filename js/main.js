@@ -118,6 +118,14 @@
   var cur=document.getElementById('telon'), curS=cur.querySelector('.cur-sticky');
   var ticking=false;
   function onScrollFx(){
+    var vh=innerHeight;
+    scards.forEach(function(card,i){
+      var top=card.getBoundingClientRect().top, st=parseFloat(getComputedStyle(card).top)||86;
+      var e=Math.min(Math.max((vh-top)/(vh-st),0),1); e=1-Math.pow(1-e,3);
+      card.style.setProperty('--ty',((1-e)*90).toFixed(1)+'px');
+      card.style.setProperty('--er',((1-e)*(i%2?5:-5)).toFixed(2)+'deg');
+      card.style.setProperty('--es',(0.92+0.08*e).toFixed(3));
+    });
     for(var i=0;i<scards.length-1;i++){
       var r=scards[i].getBoundingClientRect(), n=scards[i+1].getBoundingClientRect();
       var p=Math.min(Math.max(1-(n.top-r.top)/r.height,0),1);
