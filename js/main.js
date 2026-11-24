@@ -67,16 +67,18 @@
     }
     h.textContent=''; h.setAttribute('aria-live','off');
     var els=words.map(function(t){var w=build(t);h.appendChild(w);return w;});
-    var cur=0;
-    function show(n){ els[n].classList.remove('out'); void els[n].offsetWidth; els[n].classList.add('in'); }
-    (function wait(){ var it=document.getElementById('intro'); if(it && !it.classList.contains('done') && it.style.display!=='none') return setTimeout(wait,120); setTimeout(function(){show(0)},250); })();
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    setInterval(function(){
-      var prev=cur; cur=(cur+1)%els.length;
-      els[prev].classList.remove('in'); els[prev].classList.add('out');
-      setTimeout(function(){ els[prev].classList.remove('out'); }, 900);
-      setTimeout(function(){ show(cur); }, 280);
-    }, 3600);
+    var cur=0, tShow, tClean, tNext;
+    function show(n){ els.forEach(function(w,i){ if(i!==n) w.classList.remove('in'); }); els[n].classList.remove('out'); void els[n].offsetWidth; els[n].classList.add('in'); }
+    function go(n){
+      cur=n; clearTimeout(tShow); clearTimeout(tClean);
+      els.forEach(function(w,i){ if(i!==n && w.classList.contains('in')){ w.classList.remove('in'); w.classList.add('out'); } });
+      tShow=setTimeout(function(){ show(cur); }, 380);
+      tClean=setTimeout(function(){ els.forEach(function(w,i){ if(i!==cur) w.classList.remove('out','in'); }); }, 1000);
+    }
+    var reduceH=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function next(){ clearTimeout(tNext); if(reduceH) return; tNext=setTimeout(function(){ if(!document.hidden) go((cur+1)%els.length); next(); }, 3600); }
+    (function wait(){ var it=document.getElementById('intro'); if(it && !it.classList.contains('done') && it.style.display!=='none') return setTimeout(wait,120); setTimeout(function(){ show(0); next(); },250); })();
+    document.addEventListener('visibilitychange',function(){ if(!document.hidden){ show(cur); next(); } });
   })();
 
   // ---------- Pase de prueba: se abre al pedirlo ----------
