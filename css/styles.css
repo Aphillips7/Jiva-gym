@@ -698,6 +698,8 @@ footer a:hover{color:var(--orange)}
 #hero{justify-content:flex-end !important}
 @media(max-width:859px){#hero{padding-bottom:64px}}
 @media(min-width:860px){#hero{padding-bottom:96px}#hero h1.roll{margin-top:0;font-size:clamp(96px,9.6vw,160px)}}
+.bands{margin-top:0 !important}
+#hero{z-index:4}
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s, transform .7s}
 .rv.in{opacity:1;transform:none}
