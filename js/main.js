@@ -123,11 +123,12 @@
 
   // ---------- Reveal + counters ----------
   var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} })},{threshold:.15});
-  document.querySelectorAll('.flips,.blist,.scats,.feat,.kpis,#faq .wrap > div').forEach(function(g){
-    var kids=[].slice.call(g.children).filter(function(c){return c.classList.contains('rv')||c.tagName==='DETAILS'});
-    kids.forEach(function(c,i){ c.classList.add('rv'); c.style.setProperty('--rd',(i*90)+'ms'); });
+  // Efecto Framer solo en Beneficios y Preguntas frecuentes
+  document.querySelectorAll('#beneficios .eyebrow, #beneficios h2, #faq .eyebrow, #faq h2').forEach(function(el,i){ el.classList.add('fx'); });
+  document.querySelectorAll('.blist, #faq .wrap > div').forEach(function(g){
+    [].slice.call(g.children).forEach(function(c,i){ c.classList.add('fx'); c.style.setProperty('--rd',(i*90)+'ms'); });
   });
-  document.querySelectorAll('section h2, .eyebrow, .lead').forEach(function(el){ if(!el.closest('#hero')&&!el.closest('.curtain')&&!el.classList.contains('rv')) el.classList.add('rv'); });
+  document.querySelectorAll('.fx').forEach(function(el){io.observe(el)});
   document.querySelectorAll('.rv,.bolt-sep').forEach(function(el){io.observe(el)});
   document.querySelectorAll('.count').forEach(function(el){
     var to=+el.dataset.to, t0=null;
@@ -151,10 +152,11 @@
     var io3=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('landed'); io3.unobserve(e.target);} })},{threshold:.12});
     scards.forEach(function(c){io3.observe(c)});
   }
+  var stTop=[]; function measure(){ stTop=scards.map(function(c){return parseFloat(getComputedStyle(c).top)||86}); } measure(); addEventListener('resize',measure);
   function targets(){
     var vh=innerHeight;
     scards.forEach(function(card,i){
-      var st=parseFloat(getComputedStyle(card).top)||86;
+      var st=stTop[i];
       var mt=marks[i].getBoundingClientRect().top;
       var e=Math.min(Math.max((vh-mt)/(vh-st),0),1);
       state[i].te=e;
@@ -175,7 +177,7 @@
       card.style.setProperty('--er',((1-e)*(i%2?4:-4)).toFixed(3)+'deg');
       card.style.setProperty('--es',(0.93+0.07*e).toFixed(4));
       card.style.setProperty('--s',(1-s.p*0.07).toFixed(4));
-      card.style.setProperty('--b',(1-s.p*0.45).toFixed(4));
+      card.style.setProperty('--dim',(s.p*0.45).toFixed(4));
     });
     var p2=curP.v; p2=p2<.5?2*p2*p2:1-Math.pow(-2*p2+2,2)/2;
     curS.style.setProperty('--p',p2.toFixed(4));
