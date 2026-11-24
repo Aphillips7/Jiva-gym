@@ -43,23 +43,31 @@
   }
 
 
-  // ---------- Titular con efecto de escritura ----------
+  // ---------- Titular: letras que suben desde una máscara ----------
   (function(){
-    var el=document.querySelector('#hero h1 .type'); if(!el) return;
-    var words=(el.dataset.words||el.textContent).split('|'); if(words.length<2) return;
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var wi=0, txt=words[0], deleting=false;
-    function tick(){
-      var target=words[wi];
-      if(!deleting){
-        if(txt.length<target.length){ txt=target.slice(0,txt.length+1); el.textContent=txt; return setTimeout(tick,85); }
-        deleting=true; return setTimeout(tick,2400);
-      } else {
-        if(txt.length>0){ txt=txt.slice(0,-1); el.textContent=txt; return setTimeout(tick,40); }
-        deleting=false; wi=(wi+1)%words.length; return setTimeout(tick,250);
-      }
+    var h=document.querySelector('#hero h1.roll'); if(!h) return;
+    var words=h.dataset.words.split('|');
+    function build(text){
+      var w=document.createElement('span'); w.className='rw'; var i=0;
+      text.split(' ').forEach(function(word,wi){
+        var wd=document.createElement('span'); wd.className='rwd';
+        for(var k=0;k<word.length;k++){ var c=document.createElement('span'); c.className='rc'; c.textContent=word[k]; c.style.setProperty('--d',(i++*28)+'ms'); wd.appendChild(c); }
+        w.appendChild(wd); if(wi<text.split(' ').length-1) w.appendChild(document.createTextNode(' '));
+      });
+      return w;
     }
-    setTimeout(function(){deleting=true;tick();}, 5200);
+    h.textContent=''; h.setAttribute('aria-live','off');
+    var els=words.map(function(t){var w=build(t);h.appendChild(w);return w;});
+    var cur=0;
+    function show(n){ els[n].classList.remove('out'); void els[n].offsetWidth; els[n].classList.add('in'); }
+    setTimeout(function(){show(0)}, document.getElementById('intro') && !document.getElementById('intro').classList.contains('done') ? 3000 : 300);
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setInterval(function(){
+      var prev=cur; cur=(cur+1)%els.length;
+      els[prev].classList.remove('in'); els[prev].classList.add('out');
+      setTimeout(function(){ els[prev].classList.remove('out'); }, 900);
+      setTimeout(function(){ show(cur); }, 280);
+    }, 3600);
   })();
 
   // ---------- Pase de prueba: se abre al pedirlo ----------

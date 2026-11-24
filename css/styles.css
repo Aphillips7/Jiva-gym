@@ -686,6 +686,18 @@ footer a:hover{color:var(--orange)}
   #hero .hero-cta{margin-top:20px}
 }
 #hero h1{min-height:.9em}
+/* ---------- Titular: máscara con letras que suben ---------- */
+#hero h1.roll{display:grid;min-height:0}
+#hero h1.roll .rw{grid-area:1/1;align-self:end}
+#hero h1.roll .rwd{display:inline-block;overflow:hidden;padding:.06em 0 .04em;vertical-align:bottom;white-space:nowrap}
+#hero h1.roll .rc{display:inline-block;transform:translateY(110%);opacity:0;transition:transform .75s cubic-bezier(.19,1,.22,1) var(--d),opacity .3s ease var(--d)}
+#hero h1.roll .rw.in .rc{transform:none;opacity:1}
+#hero h1.roll .rw.out .rc{transform:translateY(-110%);opacity:0;transition:transform .55s cubic-bezier(.7,0,.84,0) calc(var(--d) * .6),opacity .45s ease calc(var(--d) * .6)}
+#hero h1.roll .rw:nth-child(2) .rc,#hero h1.roll .rw:nth-child(3) .rc{color:#fff}
+#hero h1.roll .rw .rwd:last-child .rc:last-child{color:var(--orange)}
+#hero{justify-content:flex-end !important}
+@media(max-width:859px){#hero{padding-bottom:64px}}
+@media(min-width:860px){#hero{padding-bottom:96px}#hero h1.roll{margin-top:0;font-size:clamp(96px,9.6vw,160px)}}
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s, transform .7s}
 .rv.in{opacity:1;transform:none}
