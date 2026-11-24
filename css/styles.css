@@ -649,10 +649,6 @@ footer{padding:24px 0 32px}
 }
 @media(max-width:799px){
   .feat,.scats{scroll-padding-inline:20px}
-  .store-head{align-items:flex-end;flex-wrap:nowrap}
-  .store-title{font-size:46px !important}
-  .store-btn{font-size:17px;padding:11px 14px;gap:6px}
-  .store-btn svg{width:16px;height:16px}
 }
 /* Celular: sin carrusel */
 @media(max-width:799px){
@@ -661,10 +657,11 @@ footer{padding:24px 0 32px}
   .fcard h3{left:18px !important;right:auto !important;bottom:14px !important;text-align:left !important;font-size:30px !important}
   .fcard .fmedia{justify-content:flex-end;padding-right:22px}
   .fcard .fmedia svg{width:auto !important;height:56% !important;margin:0 !important}
-  .scats{display:grid !important;grid-template-columns:repeat(3,1fr);gap:10px;overflow:visible;margin:0;padding:0}
-  .scat{flex:none !important}
-  .scat h3{font-size:20px !important;margin-top:8px !important}
-  .scat-img svg{width:86% !important}
+}
+@media(max-width:799px){
+  .store-head{flex-direction:column;align-items:flex-start;gap:20px}
+  .store-btn{font-size:22px;padding:14px 22px}
+  .scat{flex:0 0 66%}
 }
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s, transform .7s}
