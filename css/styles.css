@@ -700,9 +700,27 @@ footer a:hover{color:var(--orange)}
 @media(min-width:860px){#hero{padding-bottom:96px}#hero h1.roll{margin-top:0;font-size:clamp(96px,9.6vw,160px)}}
 .bands{margin-top:0 !important}
 #hero{z-index:4}
+/* ---------- Apariciones estilo Framer ---------- */
+.smark{display:block;height:0;width:0}
+.rv{opacity:0;transform:translateY(40px) scale(.98);filter:blur(8px);transition:opacity 1s cubic-bezier(.16,1,.3,1) var(--rd,0ms),transform 1.1s cubic-bezier(.16,1,.3,1) var(--rd,0ms),filter .9s ease var(--rd,0ms)}
+.rv.in{opacity:1;transform:none;filter:none}
+.scat-img,.fcard,.hz-media .loc-map{transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.btn,.store-btn,.pase-submit,.hz-go{transition:transform .35s cubic-bezier(.16,1,.3,1),background .2s,color .2s}
+.btn:hover,.store-btn:hover,.pase-submit:hover{transform:translateY(-2px)}
+.btn:active,.store-btn:active,.pase-submit:active{transform:scale(.97)}
+.fcard:hover{transform:translateY(-6px)}
+details[open] p{animation:faqIn .5s cubic-bezier(.16,1,.3,1)}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.rv{opacity:1;transform:none;filter:none}}
+/* Cintas: bordes lisos y sin recorte */
+.bands{height:calc(140px + 3vw) !important}
+.band-a{top:calc(20px + 1.5vw) !important}
+.band-b{top:calc(68px + 1.5vw) !important}
+.band{backface-visibility:hidden;-webkit-backface-visibility:hidden;outline:1px solid transparent;will-change:transform}
+.band-a{transform:rotate(-2.2deg) translateZ(0)}
+.band-b{transform:rotate(1.8deg) translateZ(0)}
+.band-track{will-change:transform;transform:translateZ(0)}
 /* reveal */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .7s, transform .7s}
-.rv.in{opacity:1;transform:none}
 .bolt-sep{display:block;margin:0 auto;width:36px;height:60px}
 .bolt-sep path{stroke:var(--orange);stroke-width:3;fill:none;stroke-dasharray:200;stroke-dashoffset:200;transition:stroke-dashoffset 1.2s ease}
 .bolt-sep.in path{stroke-dashoffset:0}

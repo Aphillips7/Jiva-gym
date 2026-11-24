@@ -104,6 +104,11 @@
 
   // ---------- Reveal + counters ----------
   var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} })},{threshold:.15});
+  document.querySelectorAll('.flips,.blist,.scats,.feat,.kpis,#faq .wrap > div').forEach(function(g){
+    var kids=[].slice.call(g.children).filter(function(c){return c.classList.contains('rv')||c.tagName==='DETAILS'});
+    kids.forEach(function(c,i){ c.classList.add('rv'); c.style.setProperty('--rd',(i*90)+'ms'); });
+  });
+  document.querySelectorAll('section h2, .eyebrow, .lead').forEach(function(el){ if(!el.closest('#hero')&&!el.closest('.curtain')&&!el.classList.contains('rv')) el.classList.add('rv'); });
   document.querySelectorAll('.rv,.bolt-sep').forEach(function(el){io.observe(el)});
   document.querySelectorAll('.count').forEach(function(el){
     var to=+el.dataset.to, t0=null;
@@ -113,33 +118,52 @@
   });
 
 
-  // ---------- Stack + telón (scroll) ----------
+  // ---------- Stack + telón (scroll, con suavizado tipo resorte) ----------
   var scards=[].slice.call(document.querySelectorAll('.scard'));
+  // marcadores sin transformación para medir sin "rebote" (evita temblor)
+  var marks=scards.map(function(c){var m=document.createElement('i');m.className='smark';c.parentNode.insertBefore(m,c);return m;});
   var cur=document.getElementById('telon'), curS=cur.querySelector('.cur-sticky');
-  var ticking=false;
-  function onScrollFx(){
+  var state=scards.map(function(){return {e:0,p:0,te:0,tp:0}}), curP={v:0,t:0}, running=false;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function targets(){
     var vh=innerHeight;
     scards.forEach(function(card,i){
-      var top=card.getBoundingClientRect().top, st=parseFloat(getComputedStyle(card).top)||86;
-      var e=Math.min(Math.max((vh-top)/(vh-st),0),1); e=1-Math.pow(1-e,3);
-      card.style.setProperty('--ty',((1-e)*90).toFixed(1)+'px');
-      card.style.setProperty('--er',((1-e)*(i%2?5:-5)).toFixed(2)+'deg');
-      card.style.setProperty('--es',(0.92+0.08*e).toFixed(3));
+      var st=parseFloat(getComputedStyle(card).top)||86;
+      var mt=marks[i].getBoundingClientRect().top;
+      var e=Math.min(Math.max((vh-mt)/(vh-st),0),1);
+      state[i].te=e;
+      if(i<scards.length-1){
+        var nt=marks[i+1].getBoundingClientRect().top, h=card.offsetHeight;
+        var stuck=Math.max(mt,st);
+        state[i].tp=Math.min(Math.max(1-(nt-stuck)/h,0),1);
+      }
     });
-    for(var i=0;i<scards.length-1;i++){
-      var r=scards[i].getBoundingClientRect(), n=scards[i+1].getBoundingClientRect();
-      var p=Math.min(Math.max(1-(n.top-r.top)/r.height,0),1);
-      scards[i].style.setProperty('--s',(1-p*0.07).toFixed(3));
-      scards[i].style.setProperty('--b',(1-p*0.45).toFixed(3));
-    }
-    var cr=cur.getBoundingClientRect(), span=cr.height-innerHeight;
+    var cr=cur.getBoundingClientRect(), span=cr.height-vh;
     var raw=Math.min(Math.max(-cr.top/span,0),1);
-    var p2=Math.min(Math.max((raw-0.02)/0.85,0),1); p2=p2<.5?2*p2*p2:1-Math.pow(-2*p2+2,2)/2;
-    curS.style.setProperty('--p',p2.toFixed(4));
-    ticking=false;
+    curP.t=Math.min(Math.max((raw-0.02)/0.85,0),1);
   }
-  addEventListener('scroll',function(){ if(!ticking){ticking=true;requestAnimationFrame(onScrollFx);} },{passive:true});
-  addEventListener('resize',onScrollFx); onScrollFx();
+  function apply(){
+    scards.forEach(function(card,i){
+      var s=state[i], e=1-Math.pow(1-s.e,3);
+      card.style.setProperty('--ty',((1-e)*80).toFixed(2)+'px');
+      card.style.setProperty('--er',((1-e)*(i%2?4:-4)).toFixed(3)+'deg');
+      card.style.setProperty('--es',(0.93+0.07*e).toFixed(4));
+      card.style.setProperty('--s',(1-s.p*0.07).toFixed(4));
+      card.style.setProperty('--b',(1-s.p*0.45).toFixed(4));
+    });
+    var p2=curP.v; p2=p2<.5?2*p2*p2:1-Math.pow(-2*p2+2,2)/2;
+    curS.style.setProperty('--p',p2.toFixed(4));
+  }
+  function loop(){
+    var k=reduce?1:0.14, moving=false;
+    state.forEach(function(s){ s.e+=(s.te-s.e)*k; s.p+=(s.tp-s.p)*k; if(Math.abs(s.te-s.e)>.0005||Math.abs(s.tp-s.p)>.0005) moving=true; });
+    curP.v+=(curP.t-curP.v)*(reduce?1:0.2); if(Math.abs(curP.t-curP.v)>.0005) moving=true;
+    apply();
+    if(moving) requestAnimationFrame(loop); else running=false;
+  }
+  function onScrollFx(){ targets(); if(!running){running=true;requestAnimationFrame(loop);} }
+  addEventListener('scroll',onScrollFx,{passive:true});
+  addEventListener('resize',onScrollFx); targets(); state.forEach(function(s){s.e=s.te;s.p=s.tp}); curP.v=curP.t; apply();
 
   // ---------- Flip cards ----------
   document.querySelectorAll('.flip').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('open')})});
