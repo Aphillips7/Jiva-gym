@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script>try{var t=+sessionStorage.getItem("jivaIntro");if(t&&Date.now()-t<6e5)document.documentElement.className+=" no-intro"}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Jiva Gym en La Chorrera: entrenadores de planta, sin inscripción y sin contratos. Pide tu pase de prueba gratis.">
@@ -9,7 +10,7 @@
 <link rel="preload" as="image" href="assets/logo/jiva-gym-logo-horizontal.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,700..900&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=df340ab6">
+<link rel="stylesheet" href="css/styles.css?v=cf8d13f5">
 </head>
 <body>
 
@@ -23,14 +24,32 @@
 
 <nav id="nav">
   <div class="wrap">
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mmenu"><i></i><i></i><i></i></button>
     <a class="brand" href="#hero"><img class="lockup" src="assets/logo/jiva-gym-logo-horizontal.svg" alt="Jiva Gym"></a>
     <div class="links">
-      <a href="#excusas">Excusas</a><a href="#planes">Planes</a><a href="#beneficios">Beneficios</a>
+      <a href="#planes">Planes</a><a href="#beneficios">Beneficios</a><a href="#tienda">Tienda</a>
       <a class="nav-logo" href="#hero" aria-label="Jiva Gym, inicio"><img class="lockup" src="assets/logo/jiva-gym-logo-horizontal.svg" alt="Jiva Gym"></a>
       <a href="#horario">Horario</a><a href="#horario">Ubicación</a><a href="#faq">Preguntas</a>
     </div>
   </div>
 </nav>
+
+<!-- MENÚ CELULAR -->
+<div class="mmenu" id="mmenu" aria-hidden="true">
+  <div class="mm-links">
+    <a href="#planes"><span>01</span>Planes</a>
+    <a href="#beneficios"><span>02</span>Beneficios</a>
+    <a href="#entrena"><span>03</span>Entrena en Jiva</a>
+    <a href="#tienda"><span>04</span>Tienda</a>
+    <a href="#horario"><span>05</span>Horario y ubicación</a>
+    <a href="#faq"><span>06</span>Preguntas</a>
+  </div>
+  <a class="btn btn-primary mm-cta" href="#pase">Pedir mi pase de prueba</a>
+  <div class="mm-foot">
+    <a href="https://wa.me/50769554652?text=Hola%20Jiva%20Gym%2C%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener">WhatsApp 6955-4652</a>
+    <a href="https://www.instagram.com/jiva_gym.x/" target="_blank" rel="noopener">Instagram @jiva_gym.x</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -44,40 +63,6 @@
     <h1 class="roll" data-words="Sin excusas.|Tu disciplina.|Tus resultados." aria-label="Sin excusas. Tu disciplina. Tus resultados.">Sin excusas.</h1>
   </div>
   <div class="scroll-hint">Desliza</div>
-</section>
-
-<!-- CINTAS -->
-<div class="bands" aria-label="$0 inscripción, sin contratos, entrenadores de planta, parking vigilado">
-  <div class="band band-a"><div class="band-track"><span>$0 inscripción</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Sin contratos</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Entrenadores de planta</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Parking vigilado</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Amigo gratis los fines de semana</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Desde $18.33 al mes</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>$0 inscripción</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Sin contratos</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Entrenadores de planta</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Parking vigilado</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Amigo gratis los fines de semana</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Desde $18.33 al mes</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg></div></div>
-  <div class="band band-b"><div class="band-track rev"><span>$0 inscripción</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Sin contratos</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Entrenadores de planta</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Parking vigilado</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Amigo gratis los fines de semana</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Desde $18.33 al mes</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>$0 inscripción</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Sin contratos</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Entrenadores de planta</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Parking vigilado</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Amigo gratis los fines de semana</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg><span>Desde $18.33 al mes</span><svg class="bb" viewBox="0 0 24 36" aria-hidden="true"><path d="M16 1 L3 20 L11 19 L7 35 L21 13 L13 14 Z"/></svg></div></div>
-</div>
-
-<!-- EXCUSAS -->
-<section id="excusas">
-  <div class="wrap">
-    <svg class="bolt-sep rv-bolt" viewBox="0 0 36 60"><path d="M24 2 L8 32 L22 30 L12 58"/></svg>
-    <div class="eyebrow">Zona sin excusas</div>
-    <h2 class="rv">Rompe tus <span class="o">excusas</span></h2>
-    <p class="lead rv">Toca cada excusa y mira la respuesta.</p>
-    <div class="flips">
-      <button class="flip rv"><div class="in">
-        <div class="f t-d"><q>Es muy caro</q><span>Toca para ver la respuesta ↻</span></div>
-        <div class="b t-o"><strong>Desde $18 al mes</strong><p>Con el plan anual. Sin inscripción, y puedes pagar en cuotas con BAC, Yappy, tarjeta o efectivo.</p></div>
-      </div></button>
-      <button class="flip rv"><div class="in">
-        <div class="f t-o"><q>No sé qué hacer</q><span>Toca para ver la respuesta ↻</span></div>
-        <div class="b t-d"><strong>Te armamos la rutina</strong><p>Entrenadores de planta en la sala y asesoría de rutinas incluida en tu membresía.</p></div>
-      </div></button>
-      <button class="flip rv"><div class="in">
-        <div class="f t-s"><q>¿Y dónde dejo el carro?</q><span>Toca para ver la respuesta ↻</span></div>
-        <div class="b t-o"><strong>Parking gratis</strong><p>Privado, cercado, con cámaras y vigilado por nuestro personal de 8:00 a. m. a 5:00 p. m.</p></div>
-      </div></button>
-      <button class="flip rv"><div class="in">
-        <div class="f t-d"><q>Me da pena ir solo</q><span>Toca para ver la respuesta ↻</span></div>
-        <div class="b t-o"><strong>Trae a un amigo gratis</strong><p>Sábados y domingos, un invitado por socio activo. Puede ser alguien distinto cada fin de semana.</p></div>
-      </div></button>
-    </div>
-  </div>
 </section>
 
 <!-- PLANES -->
@@ -95,7 +80,7 @@
             <h3>1 mes</h3>
             <p class="desc">Para empezar sin compromiso y conocer el gimnasio.</p>
             <ul><li>Acceso a todas las áreas</li><li>Asesoría de rutina</li><li>Invitado gratis fines de semana</li></ul>
-            <a class="btn btn-primary" href="#pase">Probar primero</a>
+            <a class="btn btn-primary plan-go" href="#contacto">Probar primero</a>
           </div>
           <div class="scard-r">
             <div class="bigprice"><sup>$</sup>35</div>
@@ -112,7 +97,7 @@
             <h3>3 meses</h3>
             <p class="desc">Tres meses es lo que tarda en volverse costumbre.</p>
             <ul><li>Todo lo del plan mensual</li><li>Ideal para crear el hábito</li></ul>
-            <a class="btn btn-dark" href="#pase">Lo quiero</a>
+            <a class="btn btn-dark plan-go" href="#contacto">Lo quiero</a>
           </div>
           <div class="scard-r">
             <div class="bigprice"><sup>$</sup>75</div>
@@ -129,7 +114,7 @@
             <h3>6 meses</h3>
             <p class="desc">El tiempo justo para ver cambios en el espejo.</p>
             <ul><li>Todo lo del plan mensual</li><li>Tiempo real para ver cambios</li></ul>
-            <a class="btn btn-primary" href="#pase">Lo quiero</a>
+            <a class="btn btn-primary plan-go" href="#contacto">Lo quiero</a>
           </div>
           <div class="scard-r">
             <div class="bigprice"><sup>$</sup>120</div>
@@ -146,7 +131,7 @@
             <h3>1 año</h3>
             <p class="desc">El compromiso completo, al precio más bajo por mes.</p>
             <ul><li>Todo lo del plan mensual</li><li>El precio más bajo por mes</li><li>Paga en cuotas con BAC</li></ul>
-            <a class="btn btn-dark" href="#pase">Lo quiero</a>
+            <a class="btn btn-dark plan-go" href="#contacto">Lo quiero</a>
           </div>
           <div class="scard-r">
             <div class="bigprice"><sup>$</sup>220</div>
@@ -155,6 +140,22 @@
           </div>
         </div>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="beneficios">
+  <div class="wrap">
+    <div class="eyebrow">Beneficios de ser socio</div>
+    <h2 class="rv">Más que <span class="o">pesas</span></h2>
+    <div class="blist">
+      <div class="brow rv"><span class="bnum">01</span><h3>Un amigo gratis cada fin de semana</h3><p>Sábados y domingos, un invitado por socio activo. Puede ser alguien distinto cada vez.</p><span class="barrow" aria-hidden="true">↗</span></div>
+      <div class="brow rv"><span class="bnum">02</span><h3>Entrenadores de planta</h3><p>Siempre hay alguien en la sala para corregirte y armarte la rutina según tu meta.</p><span class="barrow" aria-hidden="true">↗</span></div>
+      <div class="brow rv"><span class="bnum">03</span><h3>Dos pisos de máquinas</h3><p>Área para cada grupo muscular, peso libre y máquinas de pierna. Entrena sin límite de tiempo.</p><span class="barrow" aria-hidden="true">↗</span></div>
+      <div class="brow rv"><span class="bnum">04</span><h3>Cafetería y zona de trabajo</h3><p>Pide tu café o batido en Jiva Coffee y trabaja antes o después de entrenar.</p><span class="barrow" aria-hidden="true">↗</span></div>
+      <div class="brow rv"><span class="bnum">05</span><h3>Suplementos con descuento</h3><p>Asesoría y precio especial para socios.</p><span class="barrow" aria-hidden="true">↗</span></div>
+      <div class="brow rv"><span class="bnum">06</span><h3>Lockers y duchas</h3><p>Sales del gimnasio directo a tu día.</p><span class="barrow" aria-hidden="true">↗</span></div>
     </div>
   </div>
 </section>
@@ -211,22 +212,6 @@
         </div>
         <h3>Merch</h3>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- BENEFICIOS -->
-<section id="beneficios">
-  <div class="wrap">
-    <div class="eyebrow">Beneficios de ser socio</div>
-    <h2 class="rv">Más que <span class="o">pesas</span></h2>
-    <div class="blist">
-      <div class="brow rv"><span class="bnum">01</span><h3>Un amigo gratis cada fin de semana</h3><p>Sábados y domingos, un invitado por socio activo. Puede ser alguien distinto cada vez.</p><span class="barrow" aria-hidden="true">↗</span></div>
-      <div class="brow rv"><span class="bnum">02</span><h3>Entrenadores de planta</h3><p>Siempre hay alguien en la sala para corregirte y armarte la rutina según tu meta.</p><span class="barrow" aria-hidden="true">↗</span></div>
-      <div class="brow rv"><span class="bnum">03</span><h3>Dos pisos de máquinas</h3><p>Área para cada grupo muscular, peso libre y máquinas de pierna. Entrena sin límite de tiempo.</p><span class="barrow" aria-hidden="true">↗</span></div>
-      <div class="brow rv"><span class="bnum">04</span><h3>Cafetería y zona de trabajo</h3><p>Pide tu café o batido en Jiva Coffee y trabaja antes o después de entrenar.</p><span class="barrow" aria-hidden="true">↗</span></div>
-      <div class="brow rv"><span class="bnum">05</span><h3>Suplementos con descuento</h3><p>Asesoría y precio especial para socios.</p><span class="barrow" aria-hidden="true">↗</span></div>
-      <div class="brow rv"><span class="bnum">06</span><h3>Lockers y duchas</h3><p>Sales del gimnasio directo a tu día.</p><span class="barrow" aria-hidden="true">↗</span></div>
     </div>
   </div>
 </section>
@@ -362,21 +347,50 @@
   </div>
 </section>
 
-<section class="closing">
+<section class="closing" id="contacto">
   <div class="wrap">
-    <h2 class="rv">Tu única excusa era no saber <span style="color:var(--orange)">por dónde empezar</span></h2>
-    <a class="btn btn-primary" href="#pase">Quiero mi pase de prueba</a>
+    <div class="eyebrow" style="justify-content:center">¿Tienes dudas?</div>
+    <h2 class="rv">Contáctanos por <span class="o">WhatsApp</span></h2>
+    <p class="lead rv" id="cLead">Te respondemos con precios, horarios y tu pase de prueba.</p>
+    <div class="cplan" id="cPlan" hidden></div>
+    <a class="btn btn-primary" id="cWa" href="https://wa.me/50769554652?text=Hola%20Jiva%20Gym%2C%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener">Escribir por WhatsApp</a>
   </div>
 </section>
 
-<footer>
-  <div class="wrap"><img src="assets/logo/jiva-gym-logo-full.svg" alt="Jiva Gym" style="height:70px;width:auto"><span>© Jiva Gym · La Chorrera, Panamá<br><a href="https://www.instagram.com/jiva_gym.x/" target="_blank" rel="noopener">Instagram @jiva_gym.x</a> · <a href="https://wa.me/50769554652" target="_blank" rel="noopener">WhatsApp 6955-4652</a><br>Demo preparada por Alberto Phillips</span></div>
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <img class="lockup" src="assets/logo/jiva-gym-logo-horizontal.svg" alt="Jiva Gym">
+        <p>Sé más fuerte que tus excusas.</p>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <h4>Explora</h4>
+          <a href="#planes">Planes</a><a href="#beneficios">Beneficios</a><a href="#tienda">Tienda</a><a href="#faq">Preguntas</a>
+        </div>
+        <div class="ft-col">
+          <h4>Visítanos</h4>
+          <a href="#horario">Horario</a><a href="#horario">Cómo llegar</a><span>La Chorrera, Panamá</span>
+        </div>
+        <div class="ft-col">
+          <h4>Contacto</h4>
+          <a href="https://wa.me/50769554652" target="_blank" rel="noopener">WhatsApp 6955-4652</a>
+          <a href="https://www.instagram.com/jiva_gym.x/" target="_blank" rel="noopener">Instagram @jiva_gym.x</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 Jiva Gym. Todos los derechos reservados.</span>
+      <span>Diseño web: Alberto Phillips</span>
+    </div>
+  </div>
 </footer>
 
 
 <div class="toast" id="toast"><div class="ic">⚡</div><div><b id="toastT"></b><span id="toastS"></span></div></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="js/main.js?v=6903bdc6"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/main.js?v=6c3e9f8e"></script>
 </body>
 </html>

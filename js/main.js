@@ -1,26 +1,31 @@
 (function(){
   // ---------- Intro (se muestra en cada carga, arranca cuando logo y letra están listos) ----------
-  var intro=document.getElementById('intro');
-  function endIntro(){ if(intro.classList.contains('done')) return; intro.classList.add('done'); document.documentElement.classList.remove('intro-on'); startLeds(); setTimeout(function(){intro.style.display='none'},800); }
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ intro.style.display='none'; setTimeout(startLeds,50); }
+  var intro=document.getElementById('intro'), H=document.documentElement;
+  function markSeen(){ try{sessionStorage.setItem('jivaIntro',Date.now())}catch(e){} }
+  function endIntro(){ if(intro.classList.contains('done')) return; intro.classList.add('done'); H.classList.remove('intro-on'); markSeen(); startLeds(); document.dispatchEvent(new Event('introdone')); setTimeout(function(){intro.style.display='none'},800); }
+  // Se salta si ya se vio hace poco en esta pestaña, si la pestaña se abrió en segundo plano o si el usuario pidió menos movimiento
+  var skipIntro=H.classList.contains('no-intro') || document.visibilityState==='hidden' || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(skipIntro){ intro.classList.add('done'); intro.style.display='none'; markSeen(); setTimeout(startLeds,50); }
   else {
-    document.documentElement.classList.add('intro-on');
+    H.classList.add('intro-on');
     var started=false, t;
     function startIntro(){
       if(started) return; started=true;
-      setTimeout(function(){intro.classList.add('s1')},80);
-      setTimeout(function(){intro.classList.add('s2')},650);
-      setTimeout(function(){intro.classList.add('s3')},950);
-      setTimeout(function(){intro.classList.add('out')},2500);
-      t=setTimeout(endIntro,2900);
+      requestAnimationFrame(function(){ intro.classList.add('s1'); });
+      setTimeout(function(){intro.classList.add('s2')},550);
+      setTimeout(function(){intro.classList.add('s3')},850);
+      setTimeout(function(){intro.classList.add('out')},2300);
+      t=setTimeout(endIntro,2700);
     }
     var img=intro.querySelector('img');
     var imgReady=new Promise(function(r){ if(!img||img.complete) return r(); img.addEventListener('load',r); img.addEventListener('error',r); });
     var fontReady=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();
     Promise.all([imgReady,fontReady]).then(startIntro);
-    setTimeout(startIntro,1200); // por si algo tarda demasiado
+    setTimeout(startIntro,900); // por si algo tarda demasiado
     intro.addEventListener('click',function(){clearTimeout(t);endIntro()});
   }
+  // Al volver con "atrás" o al reabrir la pestaña desde memoria: nunca repetir ni dejar la intro a medias
+  addEventListener('pageshow',function(e){ if(e.persisted){ intro.classList.add('done'); intro.style.display='none'; H.classList.remove('intro-on'); } });
 
   // ---------- Hex LED wall ----------
   var svg=document.getElementById('hex'); var cells=[];
@@ -85,7 +90,8 @@
     }
     var reduceH=matchMedia('(prefers-reduced-motion: reduce)').matches;
     function next(){ clearTimeout(tNext); if(reduceH) return; tNext=setTimeout(function(){ if(!document.hidden) go((cur+1)%els.length); next(); }, 3800); }
-    (function wait(){ var it=document.getElementById('intro'); if(it && !it.classList.contains('done') && it.style.display!=='none') return setTimeout(wait,120); setTimeout(function(){ show(0); next(); },250); })();
+    var rolled=false; function startRoll(){ if(rolled) return; rolled=true; setTimeout(function(){ show(0); next(); },200); }
+    if(document.getElementById('intro').classList.contains('done')) startRoll(); else document.addEventListener('introdone',startRoll);
     document.addEventListener('visibilitychange',function(){ if(!document.hidden){ show(cur); next(); } });
   })();
 
@@ -107,9 +113,43 @@
   // ---------- Portada en celular: cargar el video solo en pantallas chicas ----------
   (function(){
     var v=document.querySelector('.hero-video'); if(!v) return;
-    if(matchMedia('(max-width: 859px)').matches){
-      v.src=v.dataset.src; v.load(); var p=v.play(); if(p&&p.catch)p.catch(function(){});
-    }
+    if(!matchMedia('(max-width: 859px)').matches) return;
+    v.muted=true; v.defaultMuted=true; v.playsInline=true; v.setAttribute('muted',''); v.setAttribute('playsinline','');
+    v.src=v.dataset.src; v.preload='auto'; v.load();
+    function tryPlay(){ if(!v.paused) return; var p=v.play(); if(p&&p.catch)p.catch(function(){}); }
+    v.addEventListener('canplay',tryPlay,{once:true}); tryPlay();
+    v.addEventListener('playing',function(){ v.classList.add('on'); });
+    // Si el iPhone bloquea el autoplay (modo ahorro de batería), arranca con el primer toque o scroll
+    ['touchstart','scroll','click'].forEach(function(ev){ addEventListener(ev,function h(){ tryPlay(); if(!v.paused) removeEventListener(ev,h); },{passive:true}); });
+    document.addEventListener('introdone',tryPlay);
+    document.addEventListener('visibilitychange',function(){ if(!document.hidden) tryPlay(); });
+    addEventListener('pageshow',tryPlay);
+  })();
+
+  // ---------- Botones de planes: llevan a Contáctanos con el plan elegido ----------
+  (function(){
+    var sec=document.getElementById('contacto'), box=document.getElementById('cPlan'), wa=document.getElementById('cWa'); if(!sec) return;
+    document.querySelectorAll('.plan-go').forEach(function(a){
+      a.addEventListener('click',function(e){
+        e.preventDefault();
+        var card=a.closest('.scard'), name=card?card.querySelector('h3').textContent.trim():'', price=card?card.querySelector('.bigprice').textContent.replace(/\s+/g,''):'';
+        if(name){
+          box.innerHTML='Plan elegido: <b>'+name+'</b> · '+price; box.hidden=false;
+          wa.href='https://wa.me/50769554652?text='+encodeURIComponent('Hola Jiva Gym, quiero el plan de '+name.toLowerCase()+' ('+price+'). ¿Cómo me inscribo?');
+        }
+        sec.querySelectorAll('.rv').forEach(function(x){x.classList.add('in')});
+        sec.scrollIntoView({behavior:'smooth',block:'center'});
+      });
+    });
+  })();
+
+  // ---------- Menú celular ----------
+  (function(){
+    var b=document.getElementById('burger'), m=document.getElementById('mmenu'), H=document.documentElement; if(!b||!m) return;
+    function set(open){ H.classList.toggle('menu-open',open); b.setAttribute('aria-expanded',open); b.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú'); m.setAttribute('aria-hidden',!open); }
+    b.addEventListener('click',function(){ set(!H.classList.contains('menu-open')); });
+    m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ set(false); }); });
+    addEventListener('keydown',function(e){ if(e.key==='Escape') set(false); });
   })();
 
   // ---------- Nav + sticky ----------
@@ -134,7 +174,7 @@
     var to=+el.dataset.to, t0=null;
     function fmt(v){return el.dataset.fmt==='k'? (v/1000).toFixed(1).replace('.',',')+' mil' : Math.round(v)}
     function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/1600,1); el.textContent=fmt(to*(1-Math.pow(1-p,3))); if(p<1)requestAnimationFrame(step)}
-    setTimeout(function(){requestAnimationFrame(step)}, seen?200:2400);
+    setTimeout(function(){requestAnimationFrame(step)}, 200);
   });
 
 
@@ -147,17 +187,23 @@
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var touch=matchMedia('(hover: none), (pointer: coarse)').matches;
   // En celular: apilado ligado al scroll con animaciones nativas del navegador (van pegadas al dedo, sin vibrar)
-  var nativeSD=touch && !reduce && window.CSS && CSS.supports('animation-timeline','--a') && CSS.supports('animation-range','cover 0% cover 50%');
+  var sdOK=!!(window.CSS && CSS.supports('animation-timeline','--a') && CSS.supports('animation-range','cover 0% cover 50%'));
+  var nativeSD=touch && !reduce; // en celular: nada ligado al scroll por JavaScript
+  var curNative=nativeSD && sdOK;
   if(nativeSD){
     document.documentElement.classList.add('stack-sd');
     marks.forEach(function(m,i){ m.style.viewTimelineName='--m'+i; });
-    scards.forEach(function(c,i){
-      var tl='--m'+i+(i<scards.length-1?', --m'+(i+1):'');
-      c.style.animationTimeline=tl;
-      if(i<scards.length-1) c.style.setProperty('--next','--m'+(i+1));
-    });
+    scards.forEach(function(c,i){ if(i<scards.length-1){ c.style.animationTimeline='--m'+(i+1); c.style.setProperty('--next','--m'+(i+1)); } });
+    var ioL=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('landed'); ioL.unobserve(e.target);} })},{rootMargin:'0px 0px -12% 0px'});
+    scards.forEach(function(c){ioL.observe(c)});
   }
-  var stTop=[]; function measure(){ stTop=scards.map(function(c){return parseFloat(getComputedStyle(c).top)||86}); } measure(); addEventListener('resize',measure);
+  var stTop=[]; function measure(){
+    stTop=scards.map(function(c){return parseFloat(getComputedStyle(c).top)||86});
+    if(nativeSD) scards.forEach(function(c,i){ if(i<scards.length-1){
+      var d=marks[i+1].offsetTop-marks[i].offsetTop; // distancia en el documento entre tarjeta i y la siguiente
+      c.style.setProperty('--cA',(stTop[i]+d)+'px'); c.style.setProperty('--cB',stTop[i+1]+'px');
+    }});
+  } measure(); addEventListener('resize',measure); addEventListener('load',measure); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(measure);
   function targets(){
     var vh=innerHeight;
     scards.forEach(function(card,i){
@@ -184,8 +230,7 @@
       card.style.setProperty('--s',(1-s.p*0.07).toFixed(4));
       card.style.setProperty('--dim',(s.p*0.45).toFixed(4));
     });
-    var p2=curP.v; p2=p2<.5?2*p2*p2:1-Math.pow(-2*p2+2,2)/2;
-    curS.style.setProperty('--p',p2.toFixed(4));
+    if(!curNative){ var p2=curP.v; p2=p2<.5?2*p2*p2:1-Math.pow(-2*p2+2,2)/2; curS.style.setProperty('--p',p2.toFixed(4)); }
   }
   function loop(){
     var k=(reduce||touch)?1:0.14, moving=false;
@@ -195,7 +240,7 @@
     if(moving) requestAnimationFrame(loop); else running=false;
   }
   function onScrollFx(){ targets(); if(!running){running=true;requestAnimationFrame(loop);} }
-  addEventListener('scroll',onScrollFx,{passive:true});
+  if(!curNative) addEventListener('scroll',onScrollFx,{passive:true});
   addEventListener('resize',onScrollFx); targets(); state.forEach(function(s){s.e=s.te;s.p=s.tp}); curP.v=curP.t; apply();
 
   // ---------- Flip cards ----------
