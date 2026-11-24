@@ -67,16 +67,24 @@
     }
     h.textContent=''; h.setAttribute('aria-live','off');
     var els=words.map(function(t){var w=build(t);h.appendChild(w);return w;});
-    var cur=0, tShow, tClean, tNext;
-    function show(n){ els.forEach(function(w,i){ if(i!==n) w.classList.remove('in'); }); els[n].classList.remove('out'); void els[n].offsetWidth; els[n].classList.add('in'); }
+    var cur=0, tA, tB, tNext;
+    var bar=document.createElement('span'); bar.className='rwipe'; h.appendChild(bar);
+    function show(n){ els.forEach(function(w,i){ if(i!==n) w.classList.remove('in'); }); void els[n].offsetWidth; els[n].classList.add('in'); }
     function go(n){
-      cur=n; clearTimeout(tShow); clearTimeout(tClean);
-      els.forEach(function(w,i){ if(i!==n && w.classList.contains('in')){ w.classList.remove('in'); w.classList.add('out'); } });
-      tShow=setTimeout(function(){ show(cur); }, 380);
-      tClean=setTimeout(function(){ els.forEach(function(w,i){ if(i!==cur) w.classList.remove('out','in'); }); }, 1000);
+      var prev=cur; cur=n; clearTimeout(tA); clearTimeout(tB);
+      var wp=els[prev].getBoundingClientRect(), wn=els[n].getBoundingClientRect(), hb=h.getBoundingClientRect();
+      var w=Math.max(wp.width,wn.width), top=Math.min(wp.top,wn.top)-hb.top, bot=Math.max(wp.bottom,wn.bottom)-hb.top;
+      bar.style.width=w+'px'; bar.style.top=top+'px'; bar.style.height=(bot-top)+'px';
+      bar.className='rwipe cover';
+      tA=setTimeout(function(){
+        els.forEach(function(x){ x.classList.add('snap'); x.classList.remove('in'); });
+        void h.offsetWidth; els.forEach(function(x){ x.classList.remove('snap'); });
+        bar.className='rwipe reveal'; show(cur);
+        tB=setTimeout(function(){ bar.className='rwipe'; }, 700);
+      }, 480);
     }
     var reduceH=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function next(){ clearTimeout(tNext); if(reduceH) return; tNext=setTimeout(function(){ if(!document.hidden) go((cur+1)%els.length); next(); }, 3600); }
+    function next(){ clearTimeout(tNext); if(reduceH) return; tNext=setTimeout(function(){ if(!document.hidden) go((cur+1)%els.length); next(); }, 3800); }
     (function wait(){ var it=document.getElementById('intro'); if(it && !it.classList.contains('done') && it.style.display!=='none') return setTimeout(wait,120); setTimeout(function(){ show(0); next(); },250); })();
     document.addEventListener('visibilitychange',function(){ if(!document.hidden){ show(cur); next(); } });
   })();
