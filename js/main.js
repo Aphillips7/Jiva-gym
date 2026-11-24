@@ -134,6 +134,13 @@
   var cur=document.getElementById('telon'), curS=cur.querySelector('.cur-sticky');
   var state=scards.map(function(){return {e:0,p:0,te:0,tp:0}}), curP={v:0,t:0}, running=false;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var touch=matchMedia('(hover: none), (pointer: coarse)').matches;
+  if(touch){
+    // En celular: entrada por tiempo (una vez) y sin efectos ligados al scroll, para que no vibre
+    document.documentElement.classList.add('stack-touch');
+    var io3=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('landed'); io3.unobserve(e.target);} })},{threshold:.12});
+    scards.forEach(function(c){io3.observe(c)});
+  }
   function targets(){
     var vh=innerHeight;
     scards.forEach(function(card,i){
@@ -152,7 +159,7 @@
     curP.t=Math.min(Math.max((raw-0.02)/0.85,0),1);
   }
   function apply(){
-    scards.forEach(function(card,i){
+    if(!touch) scards.forEach(function(card,i){
       var s=state[i], e=1-Math.pow(1-s.e,3);
       card.style.setProperty('--ty',((1-e)*80).toFixed(2)+'px');
       card.style.setProperty('--er',((1-e)*(i%2?4:-4)).toFixed(3)+'deg');
@@ -164,9 +171,9 @@
     curS.style.setProperty('--p',p2.toFixed(4));
   }
   function loop(){
-    var k=reduce?1:0.14, moving=false;
+    var k=(reduce||touch)?1:0.14, moving=false;
     state.forEach(function(s){ s.e+=(s.te-s.e)*k; s.p+=(s.tp-s.p)*k; if(Math.abs(s.te-s.e)>.0005||Math.abs(s.tp-s.p)>.0005) moving=true; });
-    curP.v+=(curP.t-curP.v)*(reduce?1:0.2); if(Math.abs(curP.t-curP.v)>.0005) moving=true;
+    curP.v+=(curP.t-curP.v)*((reduce||touch)?1:0.2); if(Math.abs(curP.t-curP.v)>.0005) moving=true;
     apply();
     if(moving) requestAnimationFrame(loop); else running=false;
   }
