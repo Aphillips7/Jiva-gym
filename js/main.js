@@ -215,7 +215,7 @@
     if(window.QRCode){ new QRCode(qr,{text:payload,width:240,height:240,colorDark:'#0B0B0C',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M}); }
     else { qr.innerHTML='<div style="width:120px;height:120px;display:flex;align-items:center;justify-content:center;color:#000;font:800 16px Archivo">'+code+'</div>'; }
     var msg='Hola Jiva Gym, soy '+name+'. Tengo mi pase de prueba '+code+' para '+dayTxt.toLowerCase()+' ('+time.toLowerCase()+').';
-    document.getElementById('tWa').href='https://wa.me/?text='+encodeURIComponent(msg);
+    document.getElementById('tWa').href='https://wa.me/50769554652?text='+encodeURIComponent(msg);
     form.classList.add('sent');
     var t=document.getElementById('ticket'); t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
     leads.unshift({name:name,phone:phoneFmt,when:dayTxt+' · '+time,goal:document.getElementById('fGoal').value,code:code,at:new Date().toISOString(),st:0});
