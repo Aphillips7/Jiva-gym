@@ -511,9 +511,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .pase-submit:active{transform:scale(.99)}
 .pase-card.sent{display:none}
 #pase .ticket{border-radius:18px}
-#faq{padding-top:8px}
+#faq{padding-top:48px}
 .cur-center::before{top:22%}.cur-center::after{bottom:22%}
-.curtain{margin-bottom:-16vh}
+.curtain{margin-bottom:-10vh}
 .cur-center::after{display:none}
 /* ---------- Beneficios: lista editorial ---------- */
 .blist{margin-top:36px;border-top:1px solid #2a2c30}
