@@ -129,6 +129,22 @@
     c.addEventListener('mouseleave',function(){ c.classList.remove('playing'); v.pause(); v.currentTime=0; });
   });
 
+
+  // ---------- Tienda: video al pasar el cursor (en celular, al verse) ----------
+  (function(){
+    var cards=[].slice.call(document.querySelectorAll('.scat')).filter(function(c){return c.querySelector('video')});
+    if(!cards.length) return;
+    function play(c){var v=c.querySelector('video');c.classList.add('playing');var p=v.play();if(p&&p.catch)p.catch(function(){c.classList.remove('playing')});}
+    function stop(c){var v=c.querySelector('video');c.classList.remove('playing');v.pause();}
+    var hover=matchMedia('(hover: hover)').matches;
+    if(hover){
+      cards.forEach(function(c){c.addEventListener('mouseenter',function(){play(c)});c.addEventListener('mouseleave',function(){stop(c);c.querySelector('video').currentTime=0;});});
+    } else if('IntersectionObserver' in window){
+      var io2=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.intersectionRatio>=0.6) play(e.target); else stop(e.target); })},{threshold:[0,0.6]});
+      cards.forEach(function(c){io2.observe(c)});
+    }
+  })();
+
   // ---------- Schedule ----------
   (function(){
     var now=new Date(), d=now.getDay(), h=now.getHours()+now.getMinutes()/60;

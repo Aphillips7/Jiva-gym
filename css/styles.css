@@ -667,6 +667,12 @@ footer{padding:24px 0 32px}
 .cur-center::before,.cur-center::after{display:none !important}
 .brow::before{opacity:0;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .2s}
 @media(min-width:900px){.brow:hover::before{opacity:1}}
+/* Tienda con fotos y video */
+.scat-img.photo{background:#111}
+.scat-img.photo img,.scat-img.photo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s, transform .6s cubic-bezier(.2,.8,.2,1)}
+.scat-img.photo video{opacity:0}
+.scat.playing .scat-img.photo video{opacity:1}
+.scat:hover .scat-img.photo img{transform:scale(1.04)}
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s, transform .7s}
 .rv.in{opacity:1;transform:none}
