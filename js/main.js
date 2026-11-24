@@ -1,15 +1,24 @@
 (function(){
-  // ---------- Intro ----------
+  // ---------- Intro (se muestra en cada carga, arranca cuando logo y letra están listos) ----------
   var intro=document.getElementById('intro');
-  var seen=false; try{seen=sessionStorage.getItem('jivaIntro')==='1'}catch(e){}
-  function endIntro(){ intro.classList.add('done'); startLeds(); try{sessionStorage.setItem('jivaIntro','1')}catch(e){} }
-  if(seen || matchMedia('(prefers-reduced-motion: reduce)').matches){ intro.style.display='none'; setTimeout(startLeds,50); }
+  function endIntro(){ if(intro.classList.contains('done')) return; intro.classList.add('done'); document.documentElement.classList.remove('intro-on'); startLeds(); setTimeout(function(){intro.style.display='none'},800); }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ intro.style.display='none'; setTimeout(startLeds,50); }
   else {
-    setTimeout(function(){intro.classList.add('s1')},250);
-    setTimeout(function(){intro.classList.add('s2')},850);
-    setTimeout(function(){intro.classList.add('s3')},1150);
-    setTimeout(function(){intro.classList.add('out')},2700);
-    var t=setTimeout(endIntro,3100);
+    document.documentElement.classList.add('intro-on');
+    var started=false, t;
+    function startIntro(){
+      if(started) return; started=true;
+      setTimeout(function(){intro.classList.add('s1')},80);
+      setTimeout(function(){intro.classList.add('s2')},650);
+      setTimeout(function(){intro.classList.add('s3')},950);
+      setTimeout(function(){intro.classList.add('out')},2500);
+      t=setTimeout(endIntro,2900);
+    }
+    var img=intro.querySelector('img');
+    var imgReady=new Promise(function(r){ if(!img||img.complete) return r(); img.addEventListener('load',r); img.addEventListener('error',r); });
+    var fontReady=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();
+    Promise.all([imgReady,fontReady]).then(startIntro);
+    setTimeout(startIntro,1200); // por si algo tarda demasiado
     intro.addEventListener('click',function(){clearTimeout(t);endIntro()});
   }
 
@@ -60,7 +69,7 @@
     var els=words.map(function(t){var w=build(t);h.appendChild(w);return w;});
     var cur=0;
     function show(n){ els[n].classList.remove('out'); void els[n].offsetWidth; els[n].classList.add('in'); }
-    setTimeout(function(){show(0)}, document.getElementById('intro') && !document.getElementById('intro').classList.contains('done') ? 3000 : 300);
+    (function wait(){ var it=document.getElementById('intro'); if(it && !it.classList.contains('done') && it.style.display!=='none') return setTimeout(wait,120); setTimeout(function(){show(0)},250); })();
     if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     setInterval(function(){
       var prev=cur; cur=(cur+1)%els.length;

@@ -720,6 +720,17 @@ details[open] p{animation:faqIn .5s cubic-bezier(.16,1,.3,1)}
 .band-a{transform:rotate(-2.2deg) translateZ(0)}
 .band-b{transform:rotate(1.8deg) translateZ(0)}
 .band-track{will-change:transform;transform:translateZ(0)}
+/* Intro: cabe en celular y bloquea el scroll mientras corre */
+html.intro-on,html.intro-on body{overflow:hidden}
+.intro-row{padding:0 20px;max-width:100%}
+@media(max-width:600px){
+  .intro-row{gap:12px}
+  .i-left img.lockup{height:24px !important}
+  .i-slash{height:28px}
+  .i-right{font-size:17px !important;letter-spacing:.02em !important}
+  .i-left{transform:translateX(-10px)}
+  .i-right{transform:translateX(10px)}
+}
 /* reveal */
 .bolt-sep{display:block;margin:0 auto;width:36px;height:60px}
 .bolt-sep path{stroke:var(--orange);stroke-width:3;fill:none;stroke-dasharray:200;stroke-dashoffset:200;transition:stroke-dashoffset 1.2s ease}
