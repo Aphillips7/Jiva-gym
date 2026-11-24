@@ -76,6 +76,15 @@
     if(location.hash==='#pase') openPase(true);
   })();
 
+
+  // ---------- Portada en celular: cargar el video solo en pantallas chicas ----------
+  (function(){
+    var v=document.querySelector('.hero-video'); if(!v) return;
+    if(matchMedia('(max-width: 859px)').matches){
+      v.src=v.dataset.src; v.load(); var p=v.play(); if(p&&p.catch)p.catch(function(){});
+    }
+  })();
+
   // ---------- Nav + sticky ----------
   var nav=document.getElementById('nav'), sticky=document.getElementById('sticky'), pase=document.getElementById('pase');
   function onScroll(){
