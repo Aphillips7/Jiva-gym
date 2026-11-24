@@ -724,12 +724,13 @@ details[open] p{animation:faqIn .5s cubic-bezier(.16,1,.3,1)}
 html.intro-on,html.intro-on body{overflow:hidden}
 .intro-row{padding:0 20px;max-width:100%}
 @media(max-width:600px){
-  .intro-row{gap:12px}
-  .i-left img.lockup{height:24px !important}
-  .i-slash{height:28px}
-  .i-right{font-size:17px !important;letter-spacing:.02em !important}
-  .i-left{transform:translateX(-10px)}
-  .i-right{transform:translateX(10px)}
+  .intro-row{flex-direction:column;gap:16px}
+  .i-left img.lockup{height:clamp(40px,11vw,52px) !important}
+  .i-slash{width:46px;height:2px;transform:skewX(-14deg) scaleX(0)}
+  #intro.s2 .i-slash{transform:skewX(-14deg) scaleX(1)}
+  .i-right{font-size:clamp(26px,7.4vw,34px) !important;letter-spacing:.03em !important}
+  .i-left{transform:translateY(-12px)}
+  .i-right{transform:translateY(12px)}
 }
 /* reveal */
 .bolt-sep{display:block;margin:0 auto;width:36px;height:60px}
