@@ -126,6 +126,16 @@
     addEventListener('pageshow',tryPlay);
   })();
 
+  // ---------- Video de portada en computadora ----------
+  (function(){
+    var v=document.querySelector('.hero-vd'); if(!v || !matchMedia('(min-width: 860px)').matches) return;
+    v.muted=true; v.playsInline=true; v.src=v.dataset.src; v.preload='auto'; v.load();
+    function tryPlay(){ if(!v.paused) return; var p=v.play(); if(p&&p.catch)p.catch(function(){}); }
+    v.addEventListener('canplay',tryPlay,{once:true}); tryPlay();
+    document.addEventListener('introdone',tryPlay);
+    document.addEventListener('visibilitychange',function(){ if(!document.hidden) tryPlay(); });
+  })();
+
   // ---------- Botones de planes: llevan a Contáctanos con el plan elegido ----------
   (function(){
     var sec=document.getElementById('contacto'), box=document.getElementById('cPlan'), wa=document.getElementById('cWa'); if(!sec) return;
